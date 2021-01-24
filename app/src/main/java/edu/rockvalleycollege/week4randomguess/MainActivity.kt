@@ -31,15 +31,16 @@ class MainActivity : AppCompatActivity() {
 
         // Compare guess to number shown in Toast
         btnGuess.setOnClickListener {
+            hideKeyboard()
+
+            //First if is logic to skip checking the number if the text box is empty (prevents crashing)
             if(txtGuess.text.isNotEmpty()) {
                 if (number == txtGuess.text.toString().toInt()) {
                     Toast.makeText(this, "Correct, Great job remembering", Toast.LENGTH_LONG).show()
                     txtGuess.setText("")
-                    hideKeyboard()
                 } else {
                     Toast.makeText(this, "InCorrect, it was not the number shown", Toast.LENGTH_LONG).show()
                     txtGuess.setText("")
-                    hideKeyboard()
                 }// end of logic to test the guess against the number
             } else{
                 Toast.makeText(this,"Need to enter a number",Toast.LENGTH_LONG).show()
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         }// End of btnGuess OnClick Listener
 
         btnToast.setOnClickListener {
+            hideKeyboard()
             number = (Math.random() * 10001).toInt()
             println(number)
             Toast.makeText(this, "Number to remember $number", Toast.LENGTH_LONG).show()
